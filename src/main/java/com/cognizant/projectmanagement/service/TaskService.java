@@ -120,7 +120,7 @@ public class TaskService {
 	}
 
 
-	public Iterable<TaskObj> getTasksByProject(Integer id) {
+	public Iterable<TaskObj> getTasksByProject(Long id) {
 		 List<TaskObj> taskObjList = new ArrayList<>();
 			List<Task> taskList = taskRepo.findAllByProjectId(id);
 			for(Task t: taskList){

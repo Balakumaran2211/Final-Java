@@ -53,7 +53,7 @@ public class TaskController {
 	} */
 	
 	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<TaskObj> getTasksByProject(@PathVariable("id") Integer id){
+	public @ResponseBody Iterable<TaskObj> getTasksByProject(@PathVariable("id") Long id){
  
 		return taskService.getTasksByProject(id);
 		

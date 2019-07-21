@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectObj {
 	
-private Integer projectId;
+private Long projectId;
 	
 	private String projectName;
 	
@@ -57,11 +57,11 @@ private Integer projectId;
 		this.completedTaskNumber = completedTaskNumber;
 	}
 
-	public Integer getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 

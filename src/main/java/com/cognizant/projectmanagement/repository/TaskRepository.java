@@ -8,8 +8,8 @@ import com.cognizant.projectmanagement.dao.Task;
 
 public interface TaskRepository extends CrudRepository<Task,Integer>{
 
-	List<Task> findAllByProjectId(Integer id);
+	List<Task> findAllByProjectId(Long id);
 		
-	List<Task> findAllByProjectIdAndStatus(Integer id, String status);
+	List<Task> findAllByProjectIdAndStatus(Long id, String status);
 	
 }

@@ -1,25 +1,27 @@
 package com.cognizant.projectmanagement.dao;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-@Component
 @Entity
+@Table(name = "user")
 public class User {
-	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer userId;
 
-    private String firstName;
-    
-    private String lastName;
-    
-    private String employeeId;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "userId")
+	private Integer userId;
+	@Column(name = "firstName")
+	private String firstName;
+	@Column(name = "lastName")
+	private String lastName;
+	@Column(name = "employeeId")
+	private String employeeId;
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -51,5 +53,5 @@ public class User {
 	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
-    
+
 }

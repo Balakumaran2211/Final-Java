@@ -1,19 +1,21 @@
 package com.cognizant.projectmanagement.dao;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-@Component
 @Entity
+@Table(name = "parenttask")
 public class ParentTask {
-	
+
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "parentId")
 	private Integer parentId;
-	
+	@Column(name = "parentTask")
 	private String parentTask;
 
 	public Integer getParentId() {
@@ -31,7 +33,5 @@ public class ParentTask {
 	public void setParentTask(String parentTask) {
 		this.parentTask = parentTask;
 	}
-	
-	
 
 }
