@@ -3,7 +3,7 @@ package com.cognizant.projectmanagement.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cognizant.projectmanagement.dao.User;
+import com.cognizant.projectmanagement.entity.User;
 import com.cognizant.projectmanagement.repository.UserRepository;
 
 @Service

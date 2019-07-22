@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cognizant.projectmanagement.dao.User;
-
+import com.cognizant.projectmanagement.entity.User;
 //import com.cognizant.projectmanagement.repository.UserRepository;
 import com.cognizant.projectmanagement.service.UserService;
 

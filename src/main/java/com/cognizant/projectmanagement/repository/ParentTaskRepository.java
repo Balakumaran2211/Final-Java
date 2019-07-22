@@ -1,9 +1,11 @@
 package com.cognizant.projectmanagement.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.cognizant.projectmanagement.dao.ParentTask;
+import com.cognizant.projectmanagement.entity.ParentTask;
 
-public interface ParentTaskRepository extends CrudRepository<ParentTask, Integer> {
+@Repository
+public interface ParentTaskRepository extends JpaRepository<ParentTask, Integer> {
 
 }

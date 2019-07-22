@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cognizant.projectmanagement.dao.ParentTask;
+import com.cognizant.projectmanagement.entity.ParentTask;
 import com.cognizant.projectmanagement.service.ParentTaskService;
 //import com.cognizant.projectmanagement.service.ParentTaskService;
 @CrossOrigin

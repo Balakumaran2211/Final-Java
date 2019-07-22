@@ -1,164 +1,160 @@
 package com.cognizant.projectmanagement.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cognizant.projectmanagement.dao.ParentTask;
-import com.cognizant.projectmanagement.dao.Project;
-import com.cognizant.projectmanagement.dao.Task;
-import com.cognizant.projectmanagement.dao.User;
+import com.cognizant.projectmanagement.entity.ParentTask;
+import com.cognizant.projectmanagement.entity.Project;
+import com.cognizant.projectmanagement.entity.Task;
+import com.cognizant.projectmanagement.entity.User;
 import com.cognizant.projectmanagement.model.TaskObj;
 import com.cognizant.projectmanagement.repository.ParentTaskRepository;
-import com.cognizant.projectmanagement.repository.ProjectRepository;
 import com.cognizant.projectmanagement.repository.TaskRepository;
-import com.cognizant.projectmanagement.repository.UserRepository;
 
 @Service
 public class TaskService {
-	
-	@Autowired 
+
+	@Autowired
 	private TaskRepository taskRepo;
-	
+
 	@Autowired
 	private ParentTaskRepository repo;
-	
-	@Autowired
-	private ProjectRepository projectRepo;
-	
-	@Autowired
-	private UserRepository userRepo;
-	
-//	@Autowired
-//	private ParentTask pTask;
-//	
-//	@Autowired
-//	private Task t;
-//	
-//	@Autowired
-//	private TaskObj obj;
-//	
-//	@Autowired
-//	private Project p;
-	
+
+	// @Autowired
+	// private ParentTask pTask;
+	//
+	// @Autowired
+	// private Task t;
+	//
+	// @Autowired
+	// private TaskObj obj;
+	//
+	// @Autowired
+	// private Project p;
+
 	public String addNewTask(TaskObj task) {
-		if(task.isParentTask()){
+		if (task.isParentTask()) {
 			ParentTask pTask = new ParentTask();
 			pTask.setParentTask(task.getTaskName());
 			repo.save(pTask);
-		}else{
+		} else {
 			Task t = new Task();
-			t.setParentId(task.getParentTaskId());
-			t.setProjectId(task.getProjectId());
+			if (null != task.getParentTaskId()) {
+				ParentTask parentTask = new ParentTask();
+				parentTask.setParentId(task.getParentTaskId());
+				t.setParentTask(parentTask);
+			}
+
+			Project project = new Project();
+			project.setProjectId(task.getProjectId());
+
+			t.setProject(project);
 			t.setTask(task.getTaskName());
 			t.setStartDate(task.getStartDate());
 			t.setEndDate(task.getEndDate());
 			t.setPriority(task.getPriority());
-			t.setUserId(task.getUserId());	
+
+			User user = new User();
+			user.setUserId(task.getUserId());
+			t.setUser(user);
 			t.setStatus("STARTED");
 			taskRepo.save(t);
 		}
-		
+
 		return "Saved";
 	}
-	
-	
+
 	public List<TaskObj> getAllTasks() {
 		List<TaskObj> taskObjList = new ArrayList<>();
-		List<Task> taskList =  (List<Task>) taskRepo.findAll();
-		for(Task t: taskList){
+		List<Task> taskList = (List<Task>) taskRepo.findAll();
+		for (Task t : taskList) {
 			TaskObj obj = new TaskObj();
 			obj.setTaskId(t.getTaskId());
-			obj.setParentTaskId(t.getParentId());
-			obj.setProjectId(t.getProjectId());
 			obj.setTaskName(t.getTask());
 			obj.setStartDate(t.getStartDate());
 			obj.setEndDate(t.getEndDate());
 			obj.setPriority(t.getPriority());
 			obj.setStatus(t.getStatus());
-			obj.setUserId(t.getUserId());
-			if(t.getParentId() != null){
-				ParentTask	 pTask = repo.findOne(t.getParentId());
-				if(pTask != null){
-					obj.setParentTaskName(pTask.getParentTask());
-				}
+			if (null != t.getParentTask()) {
+				obj.setParentTaskId(t.getParentTask().getParentId());
+				obj.setParentTaskName(t.getParentTask().getParentTask());
 			}
-			if(t.getProjectId() != null){
-				Project	 p = projectRepo.findOne(t.getProjectId());
-				if(p != null){
-					obj.setProjectName(p.getProject());
-				}	
+			if (null != t.getProject()) {
+				obj.setProjectName(t.getProject().getProject());
+				obj.setProjectId(t.getProject().getProjectId());
 			}
-			if(t.getUserId() != null){
-				User u = userRepo.findOne(t.getUserId());
-				if(u != null){
-					obj.setUserName(u.getFirstName());
-				}
+			if (null != t.getUser()) {
+				obj.setUserName(t.getUser().getFirstName());
+				obj.setUserId(t.getUser().getUserId());
 			}
-			
+
 			taskObjList.add(obj);
-			
+
 		}
-		
+
 		return taskObjList;
 	}
-	
-	
 
 	public Task updateTask(TaskObj task) {
-		Task	t = taskRepo.findOne(task.getTaskId());
-		t.setParentId(task.getParentTaskId());
-		t.setProjectId(task.getProjectId());
+		Task t = taskRepo.findOne(task.getTaskId());
+
+		ParentTask parentTask = new ParentTask();
+		parentTask.setParentId(task.getParentTaskId());
+		t.setParentTask(parentTask);
+
+		Project project = new Project();
+		project.setProjectId(task.getProjectId());
+		t.setProject(project);
+
 		t.setTask(task.getTaskName());
 		t.setStartDate(task.getStartDate());
 		t.setEndDate(task.getEndDate());
 		t.setPriority(task.getPriority());
-	    t.setStatus(task.getStatus());     
+		t.setStatus(task.getStatus());
 		return taskRepo.save(t);
 	}
 
-
 	public Iterable<TaskObj> getTasksByProject(Long id) {
-		 List<TaskObj> taskObjList = new ArrayList<>();
-			List<Task> taskList = taskRepo.findAllByProjectId(id);
-			for(Task t: taskList){
-				TaskObj obj = new TaskObj();
-				obj.setTaskId(t.getTaskId());
-				obj.setParentTaskId(t.getParentId());
-				obj.setProjectId(t.getProjectId());
-				obj.setTaskName(t.getTask());
-				obj.setStartDate(t.getStartDate());
-				obj.setEndDate(t.getEndDate());
-				obj.setPriority(t.getPriority());
-				obj.setStatus(t.getStatus());
-				obj.setUserId(t.getUserId());
-				if(t.getParentId() != null){
-					ParentTask pTask = repo.findOne(t.getParentId());
-					if(pTask != null){
-						obj.setParentTaskName(pTask.getParentTask());
-					}
-				}
-				if(t.getProjectId() != null){
-					Project p = projectRepo.findOne(t.getProjectId());
-					if(p != null){
-						obj.setProjectName(p.getProject());
-					}	
-				}
-				if(t.getUserId() != null){
-					User u = userRepo.findOne(t.getUserId());
-					if(u != null){
-						obj.setUserName(u.getFirstName());
-					}
-				}
-				
-				taskObjList.add(obj);
-				
-			}
-			return taskObjList;
-	}
-	
+		List<TaskObj> taskObjList = new ArrayList<>();
+		List<Task> taskList = taskRepo.findAll(Arrays.asList(id.intValue()));
+		for (Task t : taskList) {
+			TaskObj obj = new TaskObj();
+			obj.setTaskId(t.getTaskId());
 
+			obj.setTaskName(t.getTask());
+			obj.setStartDate(t.getStartDate());
+			obj.setEndDate(t.getEndDate());
+			obj.setPriority(t.getPriority());
+			obj.setStatus(t.getStatus());
+
+			if (null != t.getParentTask()) {
+				obj.setParentTaskId(t.getParentTask().getParentId());
+				obj.setParentTaskName(t.getParentTask().getParentTask());
+			}
+			if (null != t.getProject()) {
+				obj.setProjectName(t.getProject().getProject());
+				obj.setProjectId(t.getProject().getProjectId());
+			}
+			if (null != t.getUser()) {
+				obj.setUserName(t.getUser().getFirstName());
+				obj.setUserId(t.getUser().getUserId());
+			}
+
+			taskObjList.add(obj);
+
+		}
+		return taskObjList;
+	}
+
+	public Task endTask(TaskObj task) {
+		Task t = taskRepo.findOne(task.getTaskId());
+
+		t.setStatus("COMPLETED");
+		return taskRepo.save(t);
+	}
 
 }

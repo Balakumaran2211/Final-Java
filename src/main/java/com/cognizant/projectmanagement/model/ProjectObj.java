@@ -3,27 +3,27 @@ package com.cognizant.projectmanagement.model;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
+
 @Component
 public class ProjectObj {
-	
-private Long projectId;
-	
+
+	private Long projectId;
+
 	private String projectName;
-	
+
 	private Date startDate;
-	
+
 	private Date endDate;
-	
+
 	private Integer priority;
-	
+
 	private Integer taskNumber;
-	
-	private Integer completedTaskNumber;
-	
+
+	private Long completedTaskNumber;
+
 	private String manager;
-	
+
 	private Integer userId;
-	
 
 	public String getManager() {
 		return manager;
@@ -49,11 +49,11 @@ private Long projectId;
 		this.taskNumber = taskNumber;
 	}
 
-	public Integer getCompletedTaskNumber() {
+	public Long getCompletedTaskNumber() {
 		return completedTaskNumber;
 	}
 
-	public void setCompletedTaskNumber(Integer completedTaskNumber) {
+	public void setCompletedTaskNumber(Long completedTaskNumber) {
 		this.completedTaskNumber = completedTaskNumber;
 	}
 
@@ -64,7 +64,6 @@ private Long projectId;
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-
 
 	public String getProjectName() {
 		return projectName;
