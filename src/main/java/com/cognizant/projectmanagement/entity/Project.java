@@ -104,4 +104,13 @@ public class Project implements Serializable {
 		this.tasks = tasks;
 	}
 
+	public Project(Long projectId, String project, Date startDate, Date endDate, Integer priority) {
+		super();
+		this.projectId = projectId;
+		this.project = project;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+	}
+
 }

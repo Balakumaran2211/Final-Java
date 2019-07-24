@@ -54,4 +54,17 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
+	public User(Integer userId, String firstName, String lastName, String employeeId) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.employeeId = employeeId;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

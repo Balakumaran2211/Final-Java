@@ -24,17 +24,6 @@ public class TaskService {
 	@Autowired
 	private ParentTaskRepository repo;
 
-	// @Autowired
-	// private ParentTask pTask;
-	//
-	// @Autowired
-	// private Task t;
-	//
-	// @Autowired
-	// private TaskObj obj;
-	//
-	// @Autowired
-	// private Project p;
 
 	public String addNewTask(TaskObj task) {
 		if (task.isParentTask()) {

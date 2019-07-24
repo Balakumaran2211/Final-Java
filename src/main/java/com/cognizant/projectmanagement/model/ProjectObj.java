@@ -97,4 +97,23 @@ public class ProjectObj {
 		this.priority = priority;
 	}
 
+	public ProjectObj(Long projectId, String projectName, Date startDate, Date endDate, Integer priority,
+			Integer taskNumber, Long completedTaskNumber, String manager, Integer userId) {
+		super();
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+		this.taskNumber = taskNumber;
+		this.completedTaskNumber = completedTaskNumber;
+		this.manager = manager;
+		this.userId = userId;
+	}
+
+	public ProjectObj() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

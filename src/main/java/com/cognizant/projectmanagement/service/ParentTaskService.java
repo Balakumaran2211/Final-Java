@@ -12,8 +12,6 @@ public class ParentTaskService {
 	@Autowired
 	private ParentTaskRepository repo;
 	
-//	@Autowired
-//	private ParentTask ptask;
 
 	public Iterable<ParentTask> getAllUsers() {
 		return repo.findAll();

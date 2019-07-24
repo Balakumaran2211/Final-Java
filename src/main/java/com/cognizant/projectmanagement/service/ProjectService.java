@@ -17,14 +17,6 @@ public class ProjectService {
 	@Autowired
 	private ProjectRepository projectRepository;
 
-	// @Autowired
-	// private Project project;
-
-	// @Autowired
-	// private ProjectObj p;
-
-	// @Autowired
-	// private User u;
 
 	public ProjectObj addProject(ProjectObj p) {
 		Project project = new Project();

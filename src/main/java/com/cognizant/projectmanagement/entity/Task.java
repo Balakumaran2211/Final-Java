@@ -113,4 +113,18 @@ public class Task {
 		this.user = user;
 	}
 
+	public Task(Integer taskId, Date startDate, Date endDate, Integer priority, String status) {
+		super();
+		this.taskId = taskId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+		this.status = status;
+	}
+
+	public Task() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

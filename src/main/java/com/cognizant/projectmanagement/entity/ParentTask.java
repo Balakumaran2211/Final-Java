@@ -49,4 +49,15 @@ public class ParentTask {
 		this.tasks = tasks;
 	}
 
+	public ParentTask(Integer parentId, String parentTask) {
+		super();
+		this.parentId = parentId;
+		this.parentTask = parentTask;
+	}
+
+	public ParentTask() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

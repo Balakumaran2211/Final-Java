@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cognizant.projectmanagement.entity.ParentTask;
@@ -21,12 +22,12 @@ public class ParentTaskController {
 	private ParentTaskService parentTaskService;
 	
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<ParentTask> getAllUsers() {
+	public @ResponseBody Iterable<ParentTask> getAllParentTasks() {
 		return parentTaskService.getAllUsers();
 	}
 	
 	@PostMapping(path="/add")
-	public @ResponseBody ParentTask addNew (@RequestBody String task) {
+	public @ResponseBody ParentTask addNew (@RequestParam String task) {
 		return parentTaskService.addNew(task);
 	}
 
